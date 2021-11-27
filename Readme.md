@@ -9,7 +9,7 @@ with Tortoise ORM's migration tool, Aerich, to allow for easy database migration
 Before starting, you'll want to be familar with Nextcord's Bot class and how to use `load_extension()` to load cogs 
 on your bot.
 
-Check out [demo.py]() for the full example. You just need to call `connect_tortoise()` during the `on_connect` event 
+Check out [demo.py](https://github.com/pmdevita/nextcord-tortoise/blob/master/example/demo.py) for the full example. You just need to call `connect_tortoise()` during the `on_connect` event 
 of your bot.
 
 You will also need to add command line arguments to your bot for Aerich. Nextcord-Tortoise supplies 
@@ -17,6 +17,8 @@ You will also need to add command line arguments to your bot for Aerich. Nextcor
 arguments are given by the user, you then call `run_aerich()` instead of `bot.run()`
 
 ## Usage
+
+Once set up, using nextcord-tortoise is easy. Create or edit models in your cogs and then
 
 ### Creating Models
 
@@ -38,9 +40,9 @@ python demo.py --aerich migrate
 # Upgrade the database
 python demo.py --aerich upgrade
 # Migrate a specific cog. The app name is the same as your cog's name
-python demo.py --aerich migrate --app example
+python demo.py --aerich migrate --app Example
 # Downgrade a specific cog. --delete will delete the migration file too
-python demo.py --aerich downgrade --app example --delete
+python demo.py --aerich downgrade --app Example --delete
 ```
 
 

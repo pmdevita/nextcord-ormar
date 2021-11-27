@@ -1,7 +1,7 @@
 from aerich import Command, Migrate
 from tortoise import Tortoise
 import asyncio
-
+from . import bot_to_config
 
 class AerichManager:
     def __init__(self, config, app=None, close_connections=True):
@@ -13,8 +13,8 @@ class AerichManager:
         self.close_connections = close_connections
 
     async def __aenter__(self):
-        self.db_type = self.config.export()["connections"]["default"].split("://")[0]
-        self.command = Command(self.config.export(), location=f"./migrations/{self.db_type}", app=self.app)
+        self.db_type = self.config["connections"]["default"].split("://")[0]
+        self.command = Command(self.config, location=f"./migrations/{self.db_type}", app=self.app)
         return self.command
 
     async def __aexit__(self, exc_type, exc_val, exc_tb):
@@ -22,7 +22,8 @@ class AerichManager:
             await Tortoise.close_connections()
 
 
-def run_aerich(config, args):
+def run_aerich(bot, args, database_uri: str = None, config: dict = None):
+    config = bot_to_config(bot, database_uri, config)
     command = args.aerich
     app = args.app
     func_args = [config]
@@ -46,9 +47,9 @@ def run_aerich(config, args):
 async def init_db(config):
     # For some terrible reason, Aerich will try to init all of your apps as one migration file
     # So we're only going to let it create itself at first
-    for key in list(config.config["apps"].keys()):
+    for key in list(config["apps"].keys()):
         if key != "aerich":
-            config.config["apps"].pop(key)
+            config["apps"].pop(key)
 
     async with AerichManager(config, app="aerich") as command:
         try:
@@ -60,7 +61,7 @@ async def init_db(config):
 
 async def migrate(config, app=None):
     if app is None:
-        apps = config.config["apps"].keys()
+        apps = config["apps"].keys()
     else:
         apps = [app]
     for app in apps:
@@ -77,7 +78,7 @@ async def migrate(config, app=None):
 
 async def upgrade(config, app=None):
     if app is None:
-        apps = config.config["apps"].keys()
+        apps = config["apps"].keys()
     else:
         apps = [app]
     for app in apps:

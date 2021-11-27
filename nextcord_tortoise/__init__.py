@@ -31,7 +31,7 @@ def cogs_to_apps(bot: commands.Bot):
     return apps
 
 
-async def connect_tortoise(bot: commands.Bot, database_uri: str = None, config: dict = None):
+def bot_to_config(bot: commands.Bot, database_uri: str = None, config: dict = None):
     if config is None:
         config = DEFAULT_CONFIG.copy()
     if database_uri:
@@ -40,6 +40,11 @@ async def connect_tortoise(bot: commands.Bot, database_uri: str = None, config: 
         elif config.get("connections", None) is None:
             config["connections"] = {"default": database_uri}
     config["apps"] = cogs_to_apps(bot)
+    return config
+
+
+async def connect_tortoise(bot: commands.Bot, database_uri: str = None, config: dict = None):
+    config = bot_to_config(bot, database_uri, config)
     await Tortoise.init(config)
 
 

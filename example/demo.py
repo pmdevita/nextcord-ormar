@@ -34,7 +34,6 @@ if __name__ == '__main__':
     # If we have Aerich commands, run Aerich. Else, run the bot.
     if args.aerich:
         from nextcord_tortoise.aerich import run_aerich  # Done to avoid importing Aerich when unused
-        run_aerich(bot, args)
+        run_aerich(bot, args, database_uri)
     else:
-        connect_tortoise(bot, database_uri)
         bot.run(token)

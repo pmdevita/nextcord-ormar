@@ -11,13 +11,17 @@ class ExampleCounter(Model):
     user = fields.BigIntField()
     time = fields.DatetimeField()
 
+    class Meta:
+        # You may want to set custom table names to help avoid name collisions with other Cog's models
+        table = "example_counter"
+
 
 class Example(commands.Cog):
     def __init__(self, nextcord):
         self.nextcord = nextcord
 
     @commands.command("example")
-    def example(self, ctx: commands.Context, *args):
+    async def example(self, ctx: commands.Context, *args):
         new_example = await ExampleCounter.create(user=ctx.author.id, time=datetime.now())
         await ctx.send("Hello!")
 
