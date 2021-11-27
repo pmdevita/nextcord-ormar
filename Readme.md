@@ -1,24 +1,26 @@
 # Nextcord-Tortoise
 
 This is a library to help developers integrate the [Tortoise ORM database library](https://github.com/tortoise/tortoise-orm) 
-with their Nextcord bot. It heavily integrates with and relies on the Nextcord's Cog system. It also provides integration 
-with Tortoise ORM's migration tool, Aerich, to allow for easy database migrations.
+with their Nextcord bot. It's designed to be integrated with a bot that is using Nextcord's cog system. It also 
+provides integration with Tortoise ORM's migration tool, Aerich, to allow for easy database migrations.
 
 ## Adding to your bot
 
 Before starting, you'll want to be familar with Nextcord's Bot class and how to use `load_extension()` to load cogs 
 on your bot.
 
-Check out [demo.py](https://github.com/pmdevita/nextcord-tortoise/blob/master/example/demo.py) for the full example. You just need to call `connect_tortoise()` during the `on_connect` event 
-of your bot.
+Take a look at [demo.py](https://github.com/pmdevita/nextcord-tortoise/blob/master/example/demo.py) for a full example.
 
-You will also need to add command line arguments to your bot for Aerich. Nextcord-Tortoise supplies 
-[argparse](https://docs.python.org/3/library/argparse.html) support with `attach_argparse_group`. If Aerich 
+To initalize the database connection, you'll need to call `connect_tortoise()` during your bot's `on_connect` event.
+
+You will also need to add command line arguments to your main bot script for Aerich. Nextcord-Tortoise supplies 
+[argparse](https://docs.python.org/3/library/argparse.html) support with `attach_argparse_group()`. If Aerich 
 arguments are given by the user, you then call `run_aerich()` instead of `bot.run()`
 
 ## Usage
 
-Once set up, using nextcord-tortoise is easy. Create or edit models in your cogs and then
+Once set up, using nextcord-tortoise is easy. Create or edit models in your cogs and then run Aerich to create 
+migrations and upgrade.
 
 ### Creating Models
 
@@ -48,7 +50,7 @@ python demo.py --aerich downgrade --app Example --delete
 
 #### Notable differences with normal Aerich
 
-Nextcord-Tortoise changes a few parts of Aerich's functionality to improve functionality.
+Nextcord-Tortoise's Aerich works a little differently than Tortoise's.
 
 - `init-db` only generates migrations for Aerich's management table to prevent each Cog/App from sharing the same main 
 migration file. You'll need to call `migrate` afterwards too.

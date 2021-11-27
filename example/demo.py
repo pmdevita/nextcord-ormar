@@ -16,7 +16,7 @@ bot = commands.Bot(command_prefix="$")
 
 
 @bot.listen("on_connect")
-async def connect_database():  # If you are subclassing bot, put this in your on_connect function
+async def connect_database():  # If you are subclassing Bot, put this in your on_connect function
     await connect_tortoise(bot, database_uri)
 
 
