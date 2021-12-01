@@ -11,10 +11,10 @@ would like to install it, run `pip install git+https://github.com/pmdevita/nextc
 
 Before starting, you'll want to be familiar with Nextcord's Bot class and how to use `load_extension()` to load cogs 
 on your bot. You will also want to take a look at [Tortoise-ORM's docs](https://tortoise-orm.readthedocs.io/) and 
-at least be familiar with configuration Tortoise and .
+at least be familiar with configuring Tortoise and how to create models.
 
 There's a small demo project in the example folder, take a look at
-[demo.py](https://github.com/pmdevita/nextcord-tortoise/blob/master/example/demo.py) to start.
+[demo.py](https://github.com/pmdevita/nextcord-tortoise/blob/master/example/demo.py).
 
 Instead of subclassing or initializing `nextcord.ext.commands.Bot`, you'll need to use `nextcord_tortoise.Bot`. 
 You'll also need to pass it your Tortoise configuration settings with the `tortoise_config` argument. An example 
