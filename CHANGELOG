@@ -1,0 +1,14 @@
+Change Log
+==========
+
+0.1 (2021/11/30)
+-----------------
+
+- Restructured Tortoise and model initializing around the Tortoise Bot subclass. Model files are now explicitly
+required in the `add_cog()` command ("Explicit is better than implicit.").
+
+Fixed:
+
+- Avoid reinit-ing every time on_connection is called (#3)
+- Fix warnings with cogs that don't have Tortoise models (#1)
+

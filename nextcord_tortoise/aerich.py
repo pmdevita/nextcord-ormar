@@ -1,7 +1,7 @@
 from aerich import Command, Migrate
 from tortoise import Tortoise
 import asyncio
-from . import bot_to_config
+from copy import deepcopy
 
 class AerichManager:
     def __init__(self, config, app=None, close_connections=True):
@@ -22,11 +22,12 @@ class AerichManager:
             await Tortoise.close_connections()
 
 
-def run_aerich(bot, args, database_uri: str = None, config: dict = None):
-    config = bot_to_config(bot, database_uri, config)
+def run_aerich(bot, args):
+    config = deepcopy(bot._tortoise.config)
     command = args.aerich
     app = args.app
     func_args = [config]
+    func = None
     if command == "init-db":
         func = init_db
     elif command == "migrate":
@@ -39,6 +40,8 @@ def run_aerich(bot, args, database_uri: str = None, config: dict = None):
         func = downgrade
         func_args.append(app)
         func_args.append(args.delete)
+    if func is None:
+        raise Exception(f"Unknown Aerich command {command}")
     loop = asyncio.get_event_loop()
     loop.run_until_complete(func(*func_args))
     loop.close()

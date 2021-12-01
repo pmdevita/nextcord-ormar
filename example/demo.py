@@ -1,23 +1,20 @@
 import nextcord.ext.commands as commands
 import argparse
-from nextcord_tortoise import connect_tortoise, attach_argparse_group
+from nextcord_tortoise import attach_argparse_group
+from nextcord_tortoise import Bot as TortoiseBot
+from settings import TORTOISE_CONFIG
 
 # You'll need to use argparse or another argument library to prepare arguments for Aerich
 parser = argparse.ArgumentParser(description="Discord Bot")
 attach_argparse_group(parser)
 
 # You'll probably want to put these in a configuration file
-extensions = ["example_cog"]
+extensions = ["example_cog", "another"]
 token = "Your Discord API Token"
 database_uri = "sqlite://db.sqlite3"
 
 
-bot = commands.Bot(command_prefix="$")
-
-
-@bot.listen("on_connect")
-async def connect_database():  # If you are subclassing Bot, put this in your on_connect function
-    await connect_tortoise(bot, database_uri)
+bot = TortoiseBot(command_prefix="$", tortoise_config=TORTOISE_CONFIG)
 
 
 @bot.listen("on_ready")
@@ -34,6 +31,6 @@ if __name__ == '__main__':
     # If we have Aerich commands, run Aerich. Else, run the bot.
     if args.aerich:
         from nextcord_tortoise.aerich import run_aerich  # Done to avoid importing Aerich when unused
-        run_aerich(bot, args, database_uri)
+        run_aerich(bot, args)
     else:
         bot.run(token)
