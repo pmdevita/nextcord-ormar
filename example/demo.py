@@ -1,4 +1,3 @@
-import nextcord.ext.commands as commands
 import argparse
 from nextcord_tortoise import attach_argparse_group
 from nextcord_tortoise import Bot as TortoiseBot
@@ -11,8 +10,6 @@ attach_argparse_group(parser)
 # You'll probably want to put these in a configuration file
 extensions = ["example_cog", "another"]
 token = "Your Discord API Token"
-database_uri = "sqlite://db.sqlite3"
-
 
 bot = TortoiseBot(command_prefix="$", tortoise_config=TORTOISE_CONFIG)
 

@@ -1,5 +1,7 @@
 from nextcord.ext import commands
 
+# This is an example cog that doesn't have or use any models
+
 
 class Another(commands.Cog):
     def __init__(self, nextcord):

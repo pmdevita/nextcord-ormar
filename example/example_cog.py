@@ -12,7 +12,7 @@ class ExampleCounter(Model):
     time = fields.DatetimeField()
 
     class Meta:
-        # You may want to set custom table names to help avoid name collisions with other Cog's models
+        # You may want to set custom table names to help avoid name collisions with other cog's models
         table = "example_counter"
 
 
