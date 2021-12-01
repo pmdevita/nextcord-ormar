@@ -4,7 +4,8 @@ This is a library to help developers integrate the [Tortoise ORM database librar
 with their Nextcord bot. It's designed to be integrated with a bot that is using Nextcord's cog system. It also 
 provides integration with Tortoise ORM's migration tool, Aerich, to allow for easy database migrations.
 
-This library is currently in alpha, there may be breaking changes as the library is polished up.
+This library is currently in alpha, there may be breaking changes as the library is polished up. For now, if you 
+would like to install it, run `pip install git+https://github.com/pmdevita/nextcord-tortoise`.
 
 ## Usage
 

@@ -7,7 +7,7 @@ with open('requirements.txt') as f:
 setup(
     name="nextcord-tortoise",
     author="pmdevita",
-    packages="nextcord_tortoise",
+    packages=["nextcord_tortoise"],
     license="MIT",
     description="Database integration for Nextcord with Tortoise-ORM",
     install_requires=requirements,
