@@ -75,7 +75,7 @@ migration file. You'll need to call `migrate` afterwards too.
 
 - `migrate` and `upgrade` automatically apply to all Cogs/Apps if no app is specified
 
-- Each application is named after it's respective cog's name.
+- Each application is named after its respective cog's name.
 
 
 
