@@ -77,8 +77,10 @@ async def migrate(config, app=None):
             # The command-line version of Aerich auto-generates this folder but not the API
             Migrate.migrate_location.mkdir(parents=True, exist_ok=True)
             await command.migrate(app)  # create tables only if they don't exist
+            # These variables need to be reset between migration commands
             Migrate.upgrade_operators = []
             Migrate.downgrade_operators = []
+            Migrate._last_version_content = None
 
 
 async def upgrade(config, app=None):

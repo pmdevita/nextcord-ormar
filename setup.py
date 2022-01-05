@@ -12,6 +12,6 @@ setup(
     description="Database integration for Nextcord with Tortoise-ORM",
     install_requires=requirements,
     python_requires='>=3.8.0',
-    version="0.2"
+    version="0.2.1"
 )
 

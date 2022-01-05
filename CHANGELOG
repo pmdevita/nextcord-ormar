@@ -1,6 +1,12 @@
 Change Log
 ==========
 
+0.2.1 (2021/12/04)
+-----------------
+
+Fixed:
+- Fix another issue where apps might leak into each other's migrations
+
 0.2 (2021/12/04)
 -----------------
 
