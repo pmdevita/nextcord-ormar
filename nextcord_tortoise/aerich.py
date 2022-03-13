@@ -3,6 +3,7 @@ from tortoise import Tortoise
 import asyncio
 from copy import deepcopy
 
+
 class AerichManager:
     def __init__(self, config, app=None, close_connections=True):
         self.config = config

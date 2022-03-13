@@ -97,6 +97,7 @@ class Bot(commands.Bot):
         if isinstance(models, str):
             models = [models]
 
+        # Parse the list of given models to prepare the full model path to give to Tortoise
         if models:
             module_paths = []
             for model in models:
