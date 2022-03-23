@@ -121,6 +121,6 @@ class Bot(commands.Bot):
         if self._closed:
             return
 
-        super(Bot, self).close()
-        self._tortoise.on_close()
+        await super(Bot, self).close()
+        await self._tortoise.on_close()
 
