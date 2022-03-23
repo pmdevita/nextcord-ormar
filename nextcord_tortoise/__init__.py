@@ -117,7 +117,7 @@ class Bot(commands.Bot):
     def tortoise_config(self):
         return self._tortoise.config
 
-    def close(self) -> None:
+    async def close(self) -> None:
         if self._closed:
             return
 
