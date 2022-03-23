@@ -1,11 +1,21 @@
 Change Log
 ==========
 
+0.2.2 (2022/3/23)
+_________________
+
+- Migrated to Poetry for packaging
+
+Fixed:
+- Close Tortoise connections when Bot closes
+
+
 0.2.1 (2021/12/04)
 -----------------
 
 Fixed:
 - Fix another issue where apps might leak into each other's migrations
+
 
 0.2 (2021/12/04)
 -----------------

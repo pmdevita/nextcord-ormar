@@ -46,10 +46,13 @@ class TortoiseManager:
             self._has_inited = False
             await Tortoise.init(self.config)
 
+    async def on_close(self):
+        await Tortoise.close_connections()
+
 
 class Bot(commands.Bot):
-    def __init__(self, command_prefix, tortoise_config, help_command=commands.bot._default, description=None, **options):
-        super().__init__(command_prefix, help_command, description, **options)
+    def __init__(self, command_prefix, tortoise_config, help_command=commands.bot._default, description=None, **kwargs):
+        super().__init__(command_prefix, help_command, description, **kwargs)
         self._tortoise = TortoiseManager(tortoise_config)
         self.add_listener(self._tortoise.on_connect, "on_connect")
 
@@ -110,4 +113,14 @@ class Bot(commands.Bot):
 
             self._tortoise.add_app(cog_name, module_paths)
 
+    @property
+    def tortoise_config(self):
+        return self._tortoise.config
+
+    def close(self) -> None:
+        if self._closed:
+            return
+
+        super(Bot, self).close()
+        self._tortoise.on_close()
 
