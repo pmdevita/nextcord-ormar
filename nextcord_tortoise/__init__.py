@@ -120,7 +120,8 @@ class Bot(commands.Bot):
     async def close(self) -> None:
         if self._closed:
             return
-
+        # We register here right before close to make sure Tortoise closing is the last thing that happens
+        # in case some cogs were dependent on Tortoise being open to finish an operation.
+        self.add_listener(self._tortoise.on_close, "on_close")
         await super(Bot, self).close()
-        await self._tortoise.on_close()
 

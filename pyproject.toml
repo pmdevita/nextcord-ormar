@@ -1,13 +1,13 @@
 [tool.poetry]
 name = "nextcord-tortoise"
-version = "0.2.3"
+version = "0.2.4"
 description = "Database integration for Nextcord with Tortoise-ORM"
 authors = ["Peter DeVita <mewtwo2643@yahoo.com>"]
 license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
-nextcord = ">= 2.0.0-alpha.3"
+nextcord = "^2.0"
 aerich = ">= 0.6"
 tortoise-orm = ">= 0.17"
 

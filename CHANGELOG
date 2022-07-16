@@ -1,6 +1,13 @@
 Change Log
 ==========
 
+0.2.4 (2022/7/15)
+-----------------
+Fixed:
+- Better shutdown order with Nextcord 2.0.0+
+- Nextcord 2.0.0 is now required
+
+
 0.2.3 (2022/3/23)
 -----------------
 
