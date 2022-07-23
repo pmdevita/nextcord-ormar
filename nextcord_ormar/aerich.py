@@ -24,7 +24,7 @@ class AerichManager:
 
 
 def run_aerich(bot, args):
-    config = deepcopy(bot._tortoise.config)
+    config = deepcopy(bot._ormar.config)
     command = args.aerich
     app = args.app
     func_args = [config]
