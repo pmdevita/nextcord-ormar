@@ -1,5 +1,7 @@
 # Nextcord-Tortoise
 
+[Project update: Goodbye Tortoise-ORM](docs/goodbye-tortoise.md)
+
 This is a library to help developers integrate the [Tortoise ORM database library](https://github.com/tortoise/tortoise-orm) 
 with their Nextcord bot. It's designed to be integrated with a bot that is using Nextcord's cog system. It also 
 provides integration with Tortoise ORM's migration tool, Aerich, to allow for easy database migrations.
