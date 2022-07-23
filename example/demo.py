@@ -1,4 +1,5 @@
 import argparse
+import os
 from nextcord_ormar import attach_argparse_group
 from nextcord_ormar import Bot
 from nextcord import Intents
@@ -16,7 +17,7 @@ attach_argparse_group(parser)
 
 # You'll probably want to put these in a configuration file
 extensions = ["example_cog", "another"]
-token = "ODA2NjM5NzI0NTgzMzIxNjUx.YBsXyA.RkOPVZ0kEK50P8W2Z32w_oWUVsc"
+token = os.environ["TOKEN"]
 
 bot = Bot(command_prefix="$", database_url="sqlite:///db.sqlite", intents=intents)
 
