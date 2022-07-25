@@ -9,12 +9,18 @@ with their Nextcord bot. It's designed to be modular to complement Nextcord's co
 It also provides a wrapper around Alembic called NXAlembic, to help make 
 database migrations easy.
 
-This library is currently in alpha, there may be breaking changes as the library is polished up. For now, if you 
-would like to install it, run `pip install git+https://github.com/pmdevita/nextcord-ormar`. If you have any feedback, 
-don't hesitate to open an issue!
+This library is currently in alpha, there may be breaking changes as the library is polished up. If you have any 
+feedback, don't hesitate to open an issue!
 
 
 ## Quickstart
+
+Install Nextcord-Ormar and a supported [database backend](https://www.encode.io/databases/).
+
+```shell
+pip install nextcord-ormar aiosqlite
+```
+
 
 Import Nextcord-Ormar's bot class and pass it your [database URL](https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls).
 
