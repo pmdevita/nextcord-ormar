@@ -40,9 +40,8 @@ def include_object(object, name, type_, reflected, compare_to):
         # print(all_tables, name)
         if metadata_has_table(all_tables, name):
             return False
-        print(f"WARNING: Table {name} doesn't seem to exist in the model definitions, NXAlembic might delete it! "
-              f"Check if you have all cogs loaded and double check the outputted migration script.")
-        return True
+        # If we don't know what this table is, don't touch it
+        return False
     else:
         # print(object, name, type_)
         return True
