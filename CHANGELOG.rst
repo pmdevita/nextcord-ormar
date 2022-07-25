@@ -2,6 +2,12 @@
 Change Log
 ==========
 
+- :release:`0.3.1 <2022/7/25>`
+- :feature:`-` Publish to PyPI
+- :bug:`-` Remove debug printing
+- :bug:`-` Fix cogs deleting each other when migrating
+- :feature:`-` Refactor :py:class:`nextcord_ormar.OrmarManager` to be more standalone friendly.
+
 - :release:`0.3.0 <2022/7/24>`
 - :feature:`-` New migration tool, NXAlembic
 - :feature:`-` Rewrite from using Tortoise-ORM to Ormar

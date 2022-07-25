@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nextcord-ormar"
-version = "0.3.0"
+version = "0.3.1"
 description = "Database integration for Nextcord with Tortoise-ORM"
 authors = ["Peter DeVita <mewtwo2643@yahoo.com>"]
 license = "MIT"
