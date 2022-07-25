@@ -1,5 +1,7 @@
 # Nextcord-Ormar
 
+[![Documentation Status](https://readthedocs.org/projects/nextcord-ormar/badge/?version=latest)](https://nextcord-ormar.readthedocs.io/en/latest/?badge=latest&style=for-the-badge)
+
 [Formerly Nextcord-Tortoise](docs/goodbye-tortoise.md)
 
 This is a library to help developers integrate the [Ormar database library](https://github.com/collerek/ormar) 
