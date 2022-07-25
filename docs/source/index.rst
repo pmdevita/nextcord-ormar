@@ -14,17 +14,19 @@ migrations.
 
 Check out :doc:`usage` to get started!
 
-Indices and tables
-==================
+Nextcord-Ormar is still in active development. If you have any questions or ideas on how to make it better, feel free
+to open an issue!
+
+.. toctree::
+    :maxdepth: 2
+    :caption: Table of Contents
+
+    usage
+    migrations
+    advanced
+    api
+    changelog
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
-
-.. toctree::
-    :maxdepth: 2
-
-    usage
-    advanced
-    api
-    changelog

@@ -29,7 +29,7 @@ for this so open an issue if this doesn't work for you.
 Other Discord.py Forks
 ----------------------
 
-**Nextcord-Ormar** doesn't rely on many specific features of Nextcord so it's possible to easily implement support
+Nextcord-Ormar doesn't rely on many specific features of Nextcord so it's possible to easily implement support
 for other Discord.py forks.
 
 In your Bot's ``__init__`` function, create a ``_ormar`` property and assign it an :py:class:`nextcord_ormar.OrmarManager`
