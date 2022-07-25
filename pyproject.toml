@@ -5,6 +5,15 @@ description = "Database integration for Nextcord with Tortoise-ORM"
 authors = ["Peter DeVita <mewtwo2643@yahoo.com>"]
 license = "MIT"
 readme = "Readme.md"
+homepage = "https://github.com/pmdevita/nextcord-ormar"
+repository = "https://github.com/pmdevita/nextcord-ormar"
+documentation = "https://nextcord-ormar.readthedocs.io"
+keywords = ["nextcord", "discord", "ormar"]
+classifiers = [
+    "Topic :: Internet",
+    "Software Development :: Libraries",
+    "Framework :: AsyncIO"
+]
 
 [tool.poetry.dependencies]
 python = "^3.8"
