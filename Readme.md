@@ -84,13 +84,14 @@ Your bot is now ready to start!
 
 ### Roadmap
 
-Other than bug fixes as they arise, NXAlembic is being planned to have more work done to support more Alembic features. 
+Other than bug fixes as they arise, the current plan is to just add the rest of the Alembic commands to NXAlembic. 
 If there is a specific feature you want that is missing from either the bot integration or NXAlembic, feel free to 
 open an issue.
 
 ### Thanks to
 
 Miguel Grinberg for [Flask-Migrations](https://github.com/miguelgrinberg/Flask-Migrate) which was a useful example.
+
 [Mike Bayer](https://github.com/zzzeek) for [SQLAlchemy](https://www.sqlalchemy.org/) and [Alembic](https://github.com/sqlalchemy/alembic/)
 
 

@@ -19,6 +19,7 @@ if config.config_file_name is not None:
 
 # This is set in nxalembic when it grabs the app metadata out of the bot
 target_metadata = config.app_metadata
+all_tables = config.all_tables
 version_table = config.get_main_option("version_table")
 # target_metadata = None
 
@@ -26,6 +27,25 @@ version_table = config.get_main_option("version_table")
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+
+
+def metadata_has_table(all_tables, table_name):
+    return table_name in all_tables
+
+
+def include_object(object, name, type_, reflected, compare_to):
+    if type_ == "table":
+        if name in target_metadata.tables:
+            return True
+        # print(all_tables, name)
+        if metadata_has_table(all_tables, name):
+            return False
+        print(f"WARNING: Table {name} doesn't seem to exist in the model definitions, NXAlembic might delete it! "
+              f"Check if you have all cogs loaded and double check the outputted migration script.")
+        return True
+    else:
+        # print(object, name, type_)
+        return True
 
 
 def run_migrations_offline() -> None:
@@ -47,7 +67,8 @@ def run_migrations_offline() -> None:
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
         render_as_batch=True,
-        version_table=version_table
+        version_table=version_table,
+        include_object=include_object
     )
 
     with context.begin_transaction():
@@ -71,7 +92,8 @@ def run_migrations_online() -> None:
         context.configure(
             connection=connection, target_metadata=target_metadata,
             render_as_batch=True,
-            version_table=version_table
+            version_table=version_table,
+            include_object=include_object
         )
 
         with context.begin_transaction():

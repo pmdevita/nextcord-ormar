@@ -4,12 +4,15 @@ import sys
 
 import alembic.util.exc
 from alembic.config import Config, command
-from nextcord_ormar import Bot
+from nextcord_ormar import Bot, OrmarManager
 
 from pathlib import Path
 import importlib
 
 from nextcord_ormar.nxalembic.parser import parser
+
+def get_alembic_table_name(app_name):
+    return f"alembic.{app_name}"
 
 
 def get_bot_import():
@@ -24,6 +27,14 @@ def get_ormar_bot(module_path, module_object) -> Bot:
     return bot
 
 
+def get_all_tables(ormar_manager: OrmarManager):
+    tables = []
+    for app in ormar_manager.apps:
+        tables.append(get_alembic_table_name(app))
+        tables.extend(ormar_manager.apps[app].metadata.tables.keys())
+    return tables
+
+
 def main():
     args = parser.parse_args()
     if args.tool is None:
@@ -32,6 +43,7 @@ def main():
 
     module_path, module_object = get_bot_import()
     ormar_bot = get_ormar_bot(module_path, module_object)
+    all_tables = get_all_tables(ormar_bot._ormar)
 
     if args.app:
         app_model_meta = ormar_bot._ormar.apps.get(args.app)
@@ -66,9 +78,11 @@ def main():
         # This is where this app's migration files will end up
         cfg.set_section_option(app, "version_locations", str(version_locations))
         # This app's alembic migration table
-        cfg.set_main_option("version_table", f"alembic.{app}")
+        cfg.set_main_option("version_table", get_alembic_table_name(app))
         # This is used by env.py
         cfg.app_metadata = app_model_meta.metadata
+        # Migrations also needs awareness for all tables used by the bot
+        cfg.all_tables = all_tables
 
         match args.tool:
             case "migrate":
