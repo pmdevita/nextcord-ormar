@@ -31,11 +31,12 @@ going to need to edit that migration yourself to make it actually execute.
 - Aerich doesn't order table deletion commands correctly. Again, foreign keys are not considered at all.
 - Aerich has second-class support for SQLite and some changes will simply fail, leaving you high and dry. Contrast this 
 to Django where there is little difference in experience between database backends.
-- Aerich diffs your migrations by reading from a JSON string in the migrations table. You must connect to a database 
-to create migrations. This can also result in migration history differences between multiple developers and 
-multiple database backends, which is not easy to fix.
 - Aerich can only create one new migration (per app in Nextcord-Tortoise) at a time. If you make a migration, then make 
 more changes, making migrations again will delete and remake the current migration file.
+
+I originally also complained that Aerich could not create migrations without comparing against a live database, while 
+Django could do it just from the migration files. However, this feature is highly uncommon due to how difficult 
+it is to develop such a feature, so they get a pass for it.
 
 ## Issues with project direction
 

@@ -1,85 +1,97 @@
-# Nextcord-Tortoise
+# Nextcord-Ormar
 
-[Project update: Goodbye Tortoise-ORM](docs/goodbye-tortoise.md)
+[Formerly Nextcord-Tortoise](docs/goodbye-tortoise.md)
 
-This is a library to help developers integrate the [Tortoise ORM database library](https://github.com/tortoise/tortoise-orm) 
-with their Nextcord bot. It's designed to be integrated with a bot that is using Nextcord's cog system. It also 
-provides integration with Tortoise ORM's migration tool, Aerich, to allow for easy database migrations.
+This is a library to help developers integrate the [Ormar database library](https://github.com/collerek/ormar) 
+with their Nextcord bot. It's designed to be modular to complement Nextcord's cog system. 
+It also provides a wrapper around Alembic called NXAlembic, to help make 
+database migrations easy.
 
 This library is currently in alpha, there may be breaking changes as the library is polished up. For now, if you 
-would like to install it, run `pip install git+https://github.com/pmdevita/nextcord-tortoise`.
+would like to install it, run `pip install git+https://github.com/pmdevita/nextcord-ormar`. If you have any feedback, 
+don't hesitate to open an issue!
 
-## Usage
 
-Before starting, you'll want to be familiar with Nextcord's Bot class and how to use `load_extension()` to load cogs 
-on your bot. You will also want to take a look at [Tortoise-ORM's docs](https://tortoise-orm.readthedocs.io/) and 
-at least be familiar with configuring Tortoise and how to create models.
+## Quickstart
 
-There's a small demo project in the example folder, take a look at
-[demo.py](https://github.com/pmdevita/nextcord-tortoise/blob/master/example/demo.py).
-
-Instead of subclassing or initializing `nextcord.ext.commands.Bot`, you'll need to use `nextcord_tortoise.Bot`. 
-You'll also need to pass it your Tortoise configuration settings with the `tortoise_config` argument. An example 
-Tortoise config can be seen [here](https://tortoise-orm.readthedocs.io/en/latest/setup.html#tortoise.Tortoise.init). 
-Note that the `apps` section will be auto-generated from your cogs so you probably won't need to add anything 
-yourself here.
-
-Finally, you will need to add command line arguments to your main bot script for Aerich, Tortoise's database migration 
-tool. Nextcord-Tortoise comes with an [argparse](https://docs.python.org/3/library/argparse.html) group you can attach
-to a pre-existing (or new) argparse parser with `attach_argparse_group()`. Then, if Aerich arguments are given by the 
-user, call `run_aerich()` instead of `bot.run()` to run the Aerich command.
-
-### Creating and Adding Models
-
-Models can be created alongside your Cog in the same file or in a separate file such as `models.py`.
-
-To register your models, pass a string, or a list of strings of module import paths to `bot.add_cog()` as the 
-`models` argument.
-
-Examples:
+Import Nextcord-Ormar's bot class and pass it your [database URL](https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls).
 
 ```python
-bot.add_cog(Example(bot), models=".")  # Imports models from the same file as the cog
-bot.add_cog(Example(bot), models=".models")  # Imports models from the file "models.py" located in the same package as this cog
-bot.add_cog(Example(bot), models=[".", "general.models"])  # Imports models from the same file as the cog and from another package called "general.models"
+from nextcord_ormar import Bot
+
+bot = Bot(command_prefix="$", database_url="sqlite:///db.sqlite")
 ```
 
+In your cog file, import OrmarApp to create an app, then use AppModel to create a database model. Define your model 
+like a [normal Ormar model](https://collerek.github.io/ormar/models/).
 
-### Aerich
+```python
+import ormar
+from nextcord_ormar import OrmarApp, AppModel
 
-After you have set up your models, you'll need to create database migrations and then upgrade your database. You'll 
-want to look at how the [Aerich migrations tool](https://tortoise-orm.readthedocs.io/en/latest/migration.html?highlight=aerich#) 
-works as well.
+ModelMeta = OrmarApp.create_app("example")
 
-If you set up Aerich like the demo file, the commands will look like this.
+class ExampleTable(AppModel):
+    class Meta(ModelMeta):
+        pass
+    
+    id = ormar.Integer(primary_key=True)
+    discord_id = ormar.BigInteger()
+    message = ormar.Text()
+```
+
+You can then use this model in your cog.
+
+```python
+from nextcord.ext import commands
+
+class Example(commands.Cog):
+    def __init__(self, nextcord):
+        self.nextcord = nextcord
+
+    @commands.command("example")
+    async def example(self, ctx: commands.Context, *args):
+        new_example = await ExampleTable.objects.create(discord_id=ctx.author.id, message=args[0])
+        await ctx.send("Hello!")
+```
+
+Before you can start the bot though, you'll need to set up migrations and the database. Create a file called 
+`nxalembic.ini` in your project root folder and tell it how to import your bot.
+
+```ini
+[nxalembic]
+module = example.demo
+bot = bot
+```
+
+You can think of this as `from module import bot`, or in this instance, `from example.demo import bot`. NXAlembic will 
+use it to import your bot along with your definitions for each model.
+
+In the same folder, you can now use the `nxalembic` tool. Create migrations with
 
 ```shell
-# Intial setup of migrations
-python demo.py --aerich init-db
-python demo.py --aerich migrate
-# Upgrade the database
-python demo.py --aerich upgrade
-# Migrate a specific cog. The app name is the same as your cog's name
-python demo.py --aerich migrate --app Example
-# Downgrade a specific cog. --delete will delete the migration file too
-python demo.py --aerich downgrade --app Example --delete
+nxalembic migrate
 ```
 
+Upgrade the database
 
-#### Notable differences with normal Aerich
+```shell
+nxalembic update
+```
 
-Nextcord-Tortoise's Aerich works a little differently than Tortoise's.
-
-- `init-db` only generates migrations for Aerich's management table to prevent each Cog/App from sharing the same main 
-migration file. You'll need to call `migrate` afterwards too.
-  
-- Database files are stored in a subdirectory per database type and below that in per-cog applications.
-
-- `migrate` and `upgrade` automatically apply to all Cogs/Apps if no app is specified
-
-- Each application is named after its respective cog's name.
+Your bot is now ready to start!
 
 
+### Roadmap
 
+Other than bug fixes as they arise, the current plan is to just add the rest of the Alembic commands to NXAlembic. 
+If there is a specific feature you want that is missing from either the bot integration or NXAlembic, feel free to 
+open an issue.
+
+### Thanks to
+
+Miguel Grinberg for [Flask-Migrations](https://github.com/miguelgrinberg/Flask-Migrate) which was a useful example.
+
+[Mike Bayer](https://github.com/zzzeek) for [SQLAlchemy](https://www.sqlalchemy.org/) and [Alembic](https://github.com/sqlalchemy/alembic/)
 
 

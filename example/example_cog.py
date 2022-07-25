@@ -1,19 +1,21 @@
+import ormar
 from nextcord.ext import commands
+from nextcord_ormar import OrmarApp, AppModel
 from datetime import datetime
-from tortoise.models import Model
-from tortoise import fields
 
 # Define tortoise models here or import them from another file
 
+ModelMeta = OrmarApp.create_app("example")
 
-class ExampleCounter(Model):
-    id = fields.IntField(pk=True)
-    user = fields.BigIntField()
-    time = fields.DatetimeField()
 
-    class Meta:
-        # You may want to set custom table names to help avoid name collisions with other cog's models
-        table = "example_counter"
+class ExampleCounter(AppModel):
+    class Meta(ModelMeta):
+        pass
+
+    id = ormar.Integer(primary_key=True)
+    user = ormar.BigInteger()
+    time = ormar.DateTime()
+    # another_column = ormar.Text()
 
 
 class Example(commands.Cog):
@@ -22,9 +24,10 @@ class Example(commands.Cog):
 
     @commands.command("example")
     async def example(self, ctx: commands.Context, *args):
-        new_example = await ExampleCounter.create(user=ctx.author.id, time=datetime.now())
+        new_example = await ExampleCounter.objects.create(user=ctx.author.id, time=datetime.now())
         await ctx.send("Hello!")
 
 
 def setup(bot):
-    bot.add_cog(Example(bot), models=".")
+    # bot.add_cog(Example(bot), models=".")
+    bot.add_cog(Example(bot))
