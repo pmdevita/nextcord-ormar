@@ -54,13 +54,9 @@ class OrmarManager:
         ModelMetaTemplate.database = self.database
         self.apps: typing.Dict[str, typing.Type[ModelMetaTemplate]] = OrmarApp.apps
 
-    async def on_connect(self):
+    async def start(self):
         if not self.engine:
             self.engine = sqlalchemy.create_engine(self.database_url)
-            for app in self.apps.values():
-                for table in app.metadata.tables.values():
-                    print(table)
-                # app.metadata.create_all(self.engine)
 
     async def on_close(self):
         pass
@@ -72,7 +68,7 @@ class Bot(commands.Bot):
     def __init__(self, command_prefix, database_url, help_command=commands.bot._default, description=None, **kwargs):
         super().__init__(command_prefix, help_command, description, **kwargs)
         self._ormar = OrmarManager(database_url)
-        self.add_listener(self._ormar.on_connect, "on_connect")
+        self.add_listener(self._ormar.start, "on_connect")
 
     async def close(self) -> None:
         if self._closed:
