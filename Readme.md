@@ -1,6 +1,6 @@
 # Nextcord-Ormar
 
-[![Documentation Status](https://readthedocs.org/projects/nextcord-ormar/badge/?version=latest)](https://nextcord-ormar.readthedocs.io/en/latest/?badge=latest&style=for-the-badge)
+[![Documentation Status](https://readthedocs.org/projects/nextcord-ormar/badge/?version=latest&style=for-the-badge)](https://nextcord-ormar.readthedocs.io/en/latest/?badge=latest)
 
 [Formerly Nextcord-Tortoise](docs/goodbye-tortoise.md)
 
