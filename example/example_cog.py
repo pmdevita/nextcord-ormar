@@ -1,18 +1,21 @@
 import ormar
 from nextcord.ext import commands
-from nextcord_ormar import ModelMeta
+from nextcord_ormar import OrmarApp, AppModel
 from datetime import datetime
 
 # Define tortoise models here or import them from another file
 
+ModelMeta = OrmarApp.create_app("example")
 
-class ExampleCounter(ormar.Model):
+
+class ExampleCounter(AppModel):
     class Meta(ModelMeta):
-        tablename = "example_counter"
+        pass
 
     id = ormar.Integer(primary_key=True)
     user = ormar.BigInteger()
     time = ormar.DateTime()
+    # another_column = ormar.Text()
 
 
 class Example(commands.Cog):

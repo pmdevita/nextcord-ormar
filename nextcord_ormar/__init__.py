@@ -1,27 +1,12 @@
+import typing
 import databases
 from nextcord.ext import commands
 import ormar
 import sqlalchemy
-import argparse
-from typing import Optional, Union
-import importlib.util
+import inspect
 
-AERICH_APP = {
-    "models": ["aerich.models"],
-    "default_connection": "default",
-}
-
-APP_TEMPLATE = {
-    "models": None,
-    "default_connection": "default"
-}
-
-
-def attach_argparse_group(parser: argparse.ArgumentParser):
-    group = parser.add_argument_group("aerich")
-    group.add_argument("--aerich")
-    group.add_argument("--app")
-    group.add_argument("--delete", action="store_true")
+from nextcord_ormar.models import ModelMetaTemplate
+from nextcord_ormar.models import AppModelMetaclass, ModelMetaTemplate
 
 
 class ModuleNotFound(Exception):
@@ -30,32 +15,52 @@ class ModuleNotFound(Exception):
         super().__init__(msg)
 
 
-class ModelMeta(ormar.ModelMeta):
-    metadata = None
-    database = None
+class AppModel(ormar.Model, metaclass=AppModelMetaclass):
+    pass
+
+
+# Convenience allows us to generate separate ModelMeta for each application
+class OrmarApp:
+    apps = {}
+
+    @classmethod
+    def create_app(cls, name):
+        frames = inspect.stack()
+        frame = frames[1]
+        module = inspect.getmodule(frame[0])
+        app_module = None
+        if module:
+            app_module = module.__name__
+
+        if name in cls.apps:
+            raise Exception(f"App name \"{name}\" already registered in Ormar.")
+
+        class ModelMeta(ModelMetaTemplate):
+            _name = name
+            _app_module = app_module
+            metadata = sqlalchemy.MetaData()
+
+        cls.apps[name] = ModelMeta
+        return ModelMeta
 
 
 class OrmarManager:
     def __init__(self, database_url):
         self.database_url = database_url
         self.database = databases.Database(database_url)
-        self.metadata = sqlalchemy.MetaData()
-
-        ModelMeta.metadata = self.metadata
-        ModelMeta.database = self.database
-
-        print("Databases set up")
         self.engine = None
 
-    def add_app(self, app_name, models):
-        app = APP_TEMPLATE.copy()
-        app["models"] = models
-        self.config["apps"][app_name] = app
+        # Bootstrap ModelMeta convenience into the database and grab its apps
+        ModelMetaTemplate.database = self.database
+        self.apps: typing.Dict[str, typing.Type[ModelMetaTemplate]] = OrmarApp.apps
 
     async def on_connect(self):
         if not self.engine:
             self.engine = sqlalchemy.create_engine(self.database_url)
-            self.metadata.create_all(self.engine)
+            for app in self.apps.values():
+                for table in app.metadata.tables.values():
+                    print(table)
+                # app.metadata.create_all(self.engine)
 
     async def on_close(self):
         pass
@@ -68,67 +73,6 @@ class Bot(commands.Bot):
         super().__init__(command_prefix, help_command, description, **kwargs)
         self._ormar = OrmarManager(database_url)
         self.add_listener(self._ormar.on_connect, "on_connect")
-
-    # def add_cog(self, cog: commands.Cog, *, override: bool = False,
-    #             models: Optional[Union[list[str], str]] = None) -> None:
-    #     """Adds a "cog" to the bot and models to Tortoise.
-    #
-    #     A cog is a class that has its own event listeners and commands.
-    #
-    #     .. versionchanged:: 2.0
-    #
-    #         :exc:`.ClientException` is raised when a cog with the same name
-    #         is already loaded.
-    #
-    #     Parameters
-    #     -----------
-    #     cog: :class:`.Cog`
-    #         The cog to register to the bot.
-    #     override: :class:`bool`
-    #         If a previously loaded cog with the same name should be ejected
-    #         instead of raising an error.
-    #
-    #         .. versionadded:: 2.0
-    #     models:
-    #         A string or list of module loadpaths to load Tortoise ORM models
-    #         from. Can also be a relative module path.
-    #
-    #     Raises
-    #     -------
-    #     TypeError
-    #         The cog does not inherit from :class:`.Cog`.
-    #     CommandError
-    #         An error happened during loading.
-    #     .ClientException
-    #         A cog with the same name is already loaded.
-    #     ModuleNotFound
-    #         A database model path could not be found.
-    #     """
-    #
-    #     super(Bot, self).add_cog(cog, override=override)
-    #
-    #     cog_name = cog.__cog_name__
-    #     cog_module = cog.__module__
-    #
-    #     if isinstance(models, str):
-    #         models = [models]
-    #
-    #     # Parse the list of given models to prepare the full model path to give to Tortoise
-    #     if models:
-    #         module_paths = []
-    #         for model in models:
-    #             name = self._resolve_name(model, cog_module)
-    #
-    #             spec = importlib.util.find_spec(name)
-    #             if spec is None:
-    #                 raise ModuleNotFound(name)
-    #             module_paths.append(name)
-    #
-    #         self._ormar.add_app(cog_name, module_paths)
-
-    # @property
-    # def tortoise_config(self):
-    #     return self._ormar.config
 
     async def close(self) -> None:
         if self._closed:
