@@ -58,10 +58,8 @@ class OrmarManager:
         if not self.engine:
             self.engine = sqlalchemy.create_engine(self.database_url)
 
-    async def on_close(self):
-        pass
-        # if self.engine:
-        #     self.database.
+    async def close(self):
+        await self.database.disconnect()
 
 
 class Bot(commands.Bot):
@@ -75,6 +73,6 @@ class Bot(commands.Bot):
             return
         # We register here right before close to make sure Tortoise closing is the last thing that happens
         # in case some cogs were dependent on Tortoise being open to finish an operation.
-        self.add_listener(self._ormar.on_close, "on_close")
+        self.add_listener(self._ormar.close, "on_close")
         await super(Bot, self).close()
 
