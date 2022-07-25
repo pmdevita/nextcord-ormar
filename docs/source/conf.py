@@ -21,13 +21,15 @@ release = '0.3.1'
 extensions = [
     'sphinx.ext.duration',
     'sphinx.ext.autodoc',
-    'sphinx.ext.doctest'
+    'sphinx.ext.doctest',
+    'releases'
 ]
 
 templates_path = ['_templates']
 exclude_patterns = []
 
-
+releases_github_path = "pmdevita/nextcord-ormar"
+releases_unstable_prehistory = True
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

@@ -66,7 +66,7 @@ You can then use this model in your cog.
 
 
 Database Setup and Migrations
-----------
+-----------------------------
 
 Before you can start the bot though, you'll need to set up migrations and the database. Create a file called
 ``nxalembic.ini`` in your project root folder and tell it how to import your bot.

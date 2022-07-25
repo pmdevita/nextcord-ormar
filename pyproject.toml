@@ -12,6 +12,7 @@ ormar = "^0.11"
 aiosqlite = "^0.17"
 alembic = "^1.8"
 Sphinx = {version = "^5.1", optional = true }
+releases = {version = "^1.6", optional = true }
 
 [tool.poetry.dev-dependencies]
 
@@ -23,4 +24,4 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.extras]
-docs = ["Sphinx"]
+docs = ["Sphinx", "releases"]

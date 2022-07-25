@@ -27,3 +27,4 @@ Indices and tables
     usage
     advanced
     api
+    changelog
