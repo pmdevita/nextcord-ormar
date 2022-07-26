@@ -10,11 +10,11 @@ Before you start, you'll want to be roughly familiar with
 Installation
 ------------
 
-Install Nextcord-Ormar and a supported `database backend <https://www.encode.io/databases/>`_.
+Install Nextcord-Ormar and Ormar with the correct `database backend <https://collerek.github.io/ormar/install/>`_.
 
 .. code-block:: console
 
-    $ pip install nextcord-ormar aiosqlite
+    $ pip install nextcord-ormar ormar[sqlite]
 
 Import Nextcord-Ormar's bot class and pass it your `database URL <https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls>`_.
 

@@ -14,10 +14,10 @@ any feedback, feel free to open an issue!
 
 ## Quickstart
 
-Install Nextcord-Ormar and a supported [database backend](https://www.encode.io/databases/).
+Install Nextcord-Ormar and Ormar with the correct [database backend](https://collerek.github.io/ormar/install/).
 
 ```shell
-pip install nextcord-ormar aiosqlite
+pip install nextcord-ormar ormar[sqlite]
 ```
 
 
