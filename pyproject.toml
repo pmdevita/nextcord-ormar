@@ -11,7 +11,7 @@ documentation = "https://nextcord-ormar.readthedocs.io"
 keywords = ["nextcord", "discord", "ormar"]
 classifiers = [
     "Topic :: Internet",
-    "Software Development :: Libraries",
+    "Topic :: Software Development :: Libraries",
     "Framework :: AsyncIO"
 ]
 
