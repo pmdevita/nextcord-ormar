@@ -4,6 +4,7 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
 from alembic import context
+from nextcord_ormar.nxalembic.exceptions import MigrationIsEmpty
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -103,3 +104,21 @@ if context.is_offline_mode():
     run_migrations_offline()
 else:
     run_migrations_online()
+
+
+revision_context = context._proxy.context_opts.get("revision_context")
+# If we are making migrations
+if revision_context:
+    # If the migration is empty, don't output anything
+    is_empty = True
+    for revision in revision_context.generated_revisions:
+        if len(revision.downgrade_ops.ops) > 0:
+            is_empty = False
+        if len(revision.upgrade_ops.ops) > 0:
+            is_empty = False
+
+    if is_empty:
+        raise MigrationIsEmpty
+
+
+

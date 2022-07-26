@@ -36,6 +36,12 @@ Usage
     :ref: nextcord_ormar.nxalembic.parser.parser
     :prog: nxalembic
 
+    migrate
+            This tool will compare your Ormar models against the database and generate a migration, which is a Python
+            script that can instruct the upgrade tool on how to modify your database. Unlike Alembic, it will not
+            generate blank migrations unless you pass ``--empty``. It's a good idea to inspect each migration produced
+            by NXAlembic before using them to upgrade your database.
+
 
 
 

@@ -2,6 +2,9 @@
 Change Log
 ==========
 
+- :feature:`-` Don't generate empty migrations without --empty
+- :bug:`-` Fix --empty and --message commands not working
+
 - :release:`0.3.1 <2022/7/25>`
 - :feature:`-` Publish to PyPI
 - :bug:`-` Remove debug printing

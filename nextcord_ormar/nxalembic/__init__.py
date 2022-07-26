@@ -5,11 +5,12 @@ import sys
 import alembic.util.exc
 from alembic.config import Config, command
 from nextcord_ormar import Bot, OrmarManager
-
+from nextcord_ormar.nxalembic.exceptions import MigrationIsEmpty
 from pathlib import Path
 import importlib
 
 from nextcord_ormar.nxalembic.parser import parser
+
 
 def get_alembic_table_name(app_name):
     return f"alembic.{app_name}"
@@ -88,12 +89,14 @@ def main():
             case "migrate":
                 print(f"Migrating {app}...")
                 try:
-                    command.revision(cfg, "", autogenerate=True)
+                    command.revision(cfg, args.message, autogenerate=not args.empty)
                 except alembic.util.exc.CommandError as e:
                     if e.args[0] == "Target database is not up to date.":
                         print(f"Cannot migrate {app}, a migration hasn't been applied.")
                     else:
                         raise e
+                except MigrationIsEmpty:
+                    print("Migration is empty, skipping...")
             case "upgrade":
                 print(f"Upgrading {app}...")
                 command.upgrade(cfg, "head", sql=args.sql)

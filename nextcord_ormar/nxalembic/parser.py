@@ -5,8 +5,8 @@ subparsers = parser.add_subparsers(help="Alembic tool to use", dest="tool")
 
 migrate = subparsers.add_parser("migrate", help="Create a migration for a cog")
 migrate.add_argument("--app", help="App to create migration for. Defaults to all apps.")
-migrate.add_argument("--empty", help="Create a blank migration file.")
-migrate.add_argument("--message", "-m", help="Message to use for the migration.")
+migrate.add_argument("--empty", help="Create a blank migration file.", action="store_true")
+migrate.add_argument("--message", "-m", help="Message to use for the migration.", default="")
 
 upgrade = subparsers.add_parser("upgrade", help="Upgrade a database app")
 upgrade.add_argument("--app", help="App to create migration for. Defaults to all apps.")
