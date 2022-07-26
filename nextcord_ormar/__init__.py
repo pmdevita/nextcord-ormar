@@ -74,6 +74,7 @@ class OrmarManager:
         Start the database connection
         """
         if not self.engine:
+            await self.database.connect()
             self.engine = sqlalchemy.create_engine(self.database_url)
 
     async def close(self):

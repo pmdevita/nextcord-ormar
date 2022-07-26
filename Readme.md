@@ -21,7 +21,7 @@ pip install nextcord-ormar ormar[sqlite]
 ```
 
 
-Import Nextcord-Ormar's bot class and pass it your [database URL](https://docs.sqlalchemy.org/en/14/core/engines.html#database-urls).
+Import Nextcord-Ormar's bot class and pass it your [database URL](https://nextcord-ormar.readthedocs.io/en/latest/connections.html).
 
 ```python
 from nextcord_ormar import Bot

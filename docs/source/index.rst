@@ -22,11 +22,13 @@ any feedback, feel free to open an issue!
     :caption: Table of Contents
 
     usage
+    connections
     migrations
     advanced
     api
     changelog
 
+* `GitHub <https://github.com/pmdevita/nextcord-ormar>`_
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
