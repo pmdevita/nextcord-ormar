@@ -34,7 +34,7 @@ Usage
 
 .. argparse::
     :ref: nextcord_ormar.nxalembic.parser.parser
-    :prog: NXAlembic
+    :prog: nxalembic
 
 
 
