@@ -13,7 +13,7 @@ sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
 project = 'Nextcord-Ormar'
 copyright = '2022, Peter DeVita'
 author = 'Peter DeVita'
-release = '0.3.1'
+release = '0.3.2'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

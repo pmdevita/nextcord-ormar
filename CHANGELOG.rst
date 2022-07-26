@@ -2,6 +2,8 @@
 Change Log
 ==========
 
+- :release:`0.3.2 <2022/7/26>`
+- :bug:`-` Fix MySQL/PostgreSQL connections not intializing
 - :feature:`-` Don't generate empty migrations without --empty
 - :bug:`-` Fix --empty and --message commands not working
 
