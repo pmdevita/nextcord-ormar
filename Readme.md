@@ -6,7 +6,7 @@
 
 Nextcord-Ormar is a library to help integrate the async Django-inspired ORM
 [Ormar](https://github.com/collerek/ormar) with a [Nextcord](https://github.com/nextcord/nextcord/) bot. It's 
-designed to compliment the modular Cog system of Nextcord. It also comes with NXAlembic, a preconfigured version of
+designed to compliment the modular cog system of Nextcord. It also comes with NXAlembic, a preconfigured version of
 [Alembic](https://github.com/sqlalchemy/alembic) to help with creating and applying database migrations.
 
 Nextcord-Ormar is still in active development, there may be breaking changes as the library is polished up. If you have 
