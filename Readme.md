@@ -4,14 +4,13 @@
 
 [Formerly Nextcord-Tortoise](docs/goodbye-tortoise.md)
 
-This is a library to help developers integrate the [Ormar database library](https://github.com/collerek/ormar) 
-with their Nextcord bot. It's designed to be modular to complement Nextcord's cog system. 
-It also provides a wrapper around Alembic called NXAlembic, to help make 
-database migrations easy.
+Nextcord-Ormar is a library to help integrate the async Django-inspired ORM
+[Ormar](https://github.com/collerek/ormar) with a [Nextcord](https://github.com/nextcord/nextcord/) bot. It's 
+designed to compliment the modular Cog system of Nextcord. It also comes with NXAlembic, a preconfigured version of
+[Alembic](https://github.com/sqlalchemy/alembic) to help with creating and applying database migrations.
 
-This library is currently in alpha, there may be breaking changes as the library is polished up. If you have any 
-feedback, don't hesitate to open an issue!
-
+Nextcord-Ormar is still in active development, there may be breaking changes as the library is polished up. If you have 
+any feedback, feel free to open an issue!
 
 ## Quickstart
 
@@ -32,6 +31,8 @@ bot = Bot(command_prefix="$", database_url="sqlite:///db.sqlite")
 
 In your cog file, import OrmarApp to create an app, then use AppModel to create a database model. Define your model 
 like a [normal Ormar model](https://collerek.github.io/ormar/models/).
+
+If you prefer, you can also define your models elsewhere and import them into your cog.
 
 ```python
 import ormar
