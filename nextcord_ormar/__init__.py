@@ -91,7 +91,7 @@ class Bot(commands.Bot):
     A subclass of the Nextcord Bot class that adds integration for Ormar. Refer to the
     `Nextcord Bot docs <https://docs.nextcord.dev/en/stable/ext/commands/api.html#bot>`_.
     """
-    def __init__(self, command_prefix, database_url, help_command=commands.bot._default, description=None, **kwargs):
+    def __init__(self, command_prefix, database_url, **kwargs):
         """
         Identical to the `Nextcord Bot <https://docs.nextcord.dev/en/stable/ext/commands/api.html#bot>`_ ``__init__``
         with the addition of the positional ``database_url`` parameter.
@@ -102,7 +102,7 @@ class Bot(commands.Bot):
         :param description:
         :param kwargs:
         """
-        super().__init__(command_prefix, help_command, description, **kwargs)
+        super().__init__(command_prefix, **kwargs)
         self._ormar = OrmarManager(database_url)
         self.add_listener(self._ormar.start, "on_connect")
 

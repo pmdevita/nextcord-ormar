@@ -2,6 +2,8 @@
 Change Log
 ==========
 
+- :bug:`-` Fix support with Nextcord 2.1.0 (changes to Bot __init__)
+
 - :release:`0.3.2 <2022/7/26>`
 - :bug:`-` Fix MySQL/PostgreSQL connections not intializing
 - :feature:`-` Don't generate empty migrations without --empty
