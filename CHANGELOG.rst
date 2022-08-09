@@ -2,6 +2,7 @@
 Change Log
 ==========
 
+- :release:`0.3.3 <2022/8/9>`
 - :feature:`-` Re-add support for Python 3.8+ (removed `match` command in nxalembic)
 - :bug:`-` Fix support with Nextcord 2.1.0 (changes to Bot __init__)
 

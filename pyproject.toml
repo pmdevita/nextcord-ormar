@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "nextcord-ormar"
-version = "0.3.2"
+version = "0.3.3"
 description = "Database integration for Nextcord with Ormar"
 authors = ["Peter DeVita <mewtwo2643@yahoo.com>"]
 license = "MIT"
