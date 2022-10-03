@@ -553,7 +553,7 @@ sqlcipher = ["sqlcipher3_binary"]
 
 [[package]]
 name = "tomlkit"
-version = "0.11.2"
+version = "0.11.5"
 description = "Style preserving TOML library"
 category = "main"
 optional = true
@@ -1126,8 +1126,8 @@ sqlalchemy = [
     {file = "SQLAlchemy-1.4.38.tar.gz", hash = "sha256:93ae1d2ef42fbf0f0b3d44b35225bda123310df4b33c9bf662e7b50a68c48a98"},
 ]
 tomlkit = [
-    {file = "tomlkit-0.11.2-py3-none-any.whl", hash = "sha256:69e0675671a2eed1c08a53f342c955c4ead5d373a10f756219bf39f3d4f0018a"},
-    {file = "tomlkit-0.11.2.tar.gz", hash = "sha256:d1b49c3e460f5910b22d799b13513504acb4f5fcaee01660ee66f07bd45a271c"},
+    {file = "tomlkit-0.11.5-py3-none-any.whl", hash = "sha256:f2ef9da9cef846ee027947dc99a45d6b68a63b0ebc21944649505bf2e8bc5fe7"},
+    {file = "tomlkit-0.11.5.tar.gz", hash = "sha256:571854ebbb5eac89abcb4a2e47d7ea27b89bf29e09c35395da6f03dd4ae23d1c"},
 ]
 typing-extensions = [
     {file = "typing_extensions-4.3.0-py3-none-any.whl", hash = "sha256:25642c956049920a5aa49edcdd6ab1e06d7e5d467fc00e0506c44ac86fbfca02"},
