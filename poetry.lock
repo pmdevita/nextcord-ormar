@@ -257,7 +257,7 @@ python-versions = ">=3.7"
 
 [[package]]
 name = "nextcord"
-version = "2.1.0"
+version = "2.2.0"
 description = "A Python wrapper for the Discord API forked from discord.py"
 category = "main"
 optional = false
@@ -268,7 +268,7 @@ aiohttp = ">=3.8.0,<4.0.0"
 typing_extensions = ">=4.2.0,<5"
 
 [package.extras]
-docs = ["sphinx (==5.0.1)", "sphinxcontrib-websupport", "sphinxcontrib_trio (==1.1.2)", "typing_extensions (>=4.2.0,<5)"]
+docs = ["sphinx (>=5.0.1,<6)", "sphinxcontrib-websupport", "sphinxcontrib_trio (==1.1.2)", "typing_extensions (>=4.2.0,<5)"]
 speed = ["Brotli", "aiodns (>=1.1)", "cchardet", "orjson (>=3.5.4)"]
 voice = ["PyNaCl (>=1.3.0,<1.5)"]
 
@@ -977,7 +977,7 @@ multidict = [
     {file = "multidict-6.0.2.tar.gz", hash = "sha256:5ff3bd75f38e4c43f1f470f2df7a4d430b821c4ce22be384e1459cb57d6bb013"},
 ]
 nextcord = [
-    {file = "nextcord-2.1.0.tar.gz", hash = "sha256:1402662d334e452d56a312240f8d4acfeb26d29e4a320cd8767b9a96e2f461a3"},
+    {file = "nextcord-2.2.0.tar.gz", hash = "sha256:25c52c9a7d22fddc24adddffbed3f1ef8e8acb4e04fba1620c455c3f2d1fbb28"},
 ]
 ormar = [
     {file = "ormar-0.11.2-py3-none-any.whl", hash = "sha256:22f8c561bf9991c59eecb3a88d7acde10bfe5380cb36211f2e987fd7fedcd7b0"},
