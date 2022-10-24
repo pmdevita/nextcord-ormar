@@ -274,7 +274,7 @@ voice = ["PyNaCl (>=1.3.0,<1.5)"]
 
 [[package]]
 name = "ormar"
-version = "0.11.3"
+version = "0.12.0"
 description = "A simple async ORM with fastapi in mind and pydantic validation."
 category = "main"
 optional = false
@@ -610,7 +610,7 @@ docs = ["Sphinx", "releases", "sphinx-argparse", "six", "tomlkit"]
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "f809ef4b170d04ad6bfd58210e2ba3c95eb705b09f6ef8d134d39a201960be58"
+content-hash = "b023ae68298da0b8febf77202ca4579fcab5fe9378e5c6bdc687ac5bd0537d7b"
 
 [metadata.files]
 aiohttp = [
@@ -980,8 +980,8 @@ nextcord = [
     {file = "nextcord-2.2.0.tar.gz", hash = "sha256:25c52c9a7d22fddc24adddffbed3f1ef8e8acb4e04fba1620c455c3f2d1fbb28"},
 ]
 ormar = [
-    {file = "ormar-0.11.3-py3-none-any.whl", hash = "sha256:649e922d70d2bda4e079d93c31accd74583f547dcf7e4eb652120d95e39e5308"},
-    {file = "ormar-0.11.3.tar.gz", hash = "sha256:b82994d8db000685a9bbc4ed53bbbef33811f9fcfd3ae1a0318dff6b1a634f86"},
+    {file = "ormar-0.12.0-py3-none-any.whl", hash = "sha256:bb71e5a9ea6477de1c5ed5acf5692067152ef7452ef9625e5eeb13f165068722"},
+    {file = "ormar-0.12.0.tar.gz", hash = "sha256:fc76a3a1ef602c8c65c6b956bd57ecc4961d3ba750f1deb498cda822a7162288"},
 ]
 packaging = [
     {file = "packaging-21.3-py3-none-any.whl", hash = "sha256:ef103e05f519cdc783ae24ea4e2e0f508a9c99b2d4969652eed6a2e1ea5bd522"},
