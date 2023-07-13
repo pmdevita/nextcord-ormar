@@ -8,12 +8,18 @@
 
 import pathlib
 import sys
-sys.path.insert(0, pathlib.Path(__file__).parents[2].resolve().as_posix())
+from tomlkit import parse
+from datetime import datetime
+project_root = pathlib.Path(__file__).parents[2]
+sys.path.insert(0, project_root.resolve().as_posix())
+
+with open(project_root / "pyproject.toml") as f:
+    pyproject = parse(f.read())
 
 project = 'Nextcord-Ormar'
-copyright = '2022, Peter DeVita'
+copyright = f"{datetime.now().year}, Peter DeVita"
 author = 'Peter DeVita'
-release = '0.3.2'
+release = pyproject["tool"]["poetry"]["version"]
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration

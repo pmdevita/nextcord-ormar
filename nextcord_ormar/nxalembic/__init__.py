@@ -85,24 +85,24 @@ def main():
         # Migrations also needs awareness for all tables used by the bot
         cfg.all_tables = all_tables
 
-        match args.tool:
-            case "migrate":
-                print(f"Migrating {app}...")
-                try:
-                    command.revision(cfg, args.message, autogenerate=not args.empty)
-                except alembic.util.exc.CommandError as e:
-                    if e.args[0] == "Target database is not up to date.":
-                        print(f"Cannot migrate {app}, a migration hasn't been applied.")
-                    else:
-                        raise e
-                except MigrationIsEmpty:
-                    print("Migration is empty, skipping...")
-            case "upgrade":
-                print(f"Upgrading {app}...")
-                command.upgrade(cfg, "head", sql=args.sql)
-            case "downgrade":
-                print(f"Downgrading {app}...")
-                command.downgrade(cfg, "-1", sql=args.sql)
+        # match args.tool:
+        if args.tool == "migrate":
+            print(f"Migrating {app}...")
+            try:
+                command.revision(cfg, args.message, autogenerate=not args.empty)
+            except alembic.util.exc.CommandError as e:
+                if e.args[0] == "Target database is not up to date.":
+                    print(f"Cannot migrate {app}, a migration hasn't been applied.")
+                else:
+                    raise e
+            except MigrationIsEmpty:
+                print("Migration is empty, skipping...")
+        elif args.tool == "upgrade":
+            print(f"Upgrading {app}...")
+            command.upgrade(cfg, "head", sql=args.sql)
+        elif args.tool == "downgrade":
+            print(f"Downgrading {app}...")
+            command.downgrade(cfg, "-1", sql=args.sql)
     print("Done!")
 
 

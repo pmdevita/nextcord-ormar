@@ -39,7 +39,7 @@ URL should start with ``mysql+pymysql://``
 
 
 PostgreSQL
-------
+----------
 
 .. code-block:: shell
 
