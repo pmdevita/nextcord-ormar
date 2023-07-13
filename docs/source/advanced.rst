@@ -33,7 +33,7 @@ Nextcord-Ormar doesn't rely on many specific features of Nextcord so it's possib
 for other Discord.py forks.
 
 In your Bot's ``__init__`` function, create a ``_ormar`` property and assign it an :py:class:`nextcord_ormar.OrmarManager`
-instance. Then, register it's :py:meth:`nextcord_ormar.OrmarManager.start` function with the ``on_connect`` event.
+instance. Then, register its :py:meth:`nextcord_ormar.OrmarManager.start` function with the ``on_connect`` event.
 
 .. code-block:: python
 
