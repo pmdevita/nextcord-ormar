@@ -4,6 +4,13 @@
 
 [Formerly Nextcord-Tortoise](docs/goodbye-tortoise.md)
 
+---
+
+Nextcord-Ormar is being sunset for its spiritual successor, [hikari-atsume](https://github.com/pmdevita/nextcord-ormar).
+
+---
+
+
 Nextcord-Ormar is a library to help integrate the async Django-inspired ORM
 [Ormar](https://github.com/collerek/ormar) with a [Nextcord](https://github.com/nextcord/nextcord/) bot. It's 
 designed to compliment the modular cog system of Nextcord. It also comes with NXAlembic, a preconfigured version of
